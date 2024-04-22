@@ -31,7 +31,7 @@ class _PresensiPageState extends State<PresensiPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Scan QR Code'),
+        title: const Text('Scan QR Presensi'),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
