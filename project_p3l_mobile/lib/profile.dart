@@ -1,50 +1,56 @@
 import 'package:flutter/material.dart';
 
-class ProfilePage extends StatelessWidget {
-  final String userName = 'John Doe';
-  final String userEmail = 'johndoe@example.com';
-  final String profileImageUrl = 'https://via.placeholder.com/150';
+class ProfilePage extends StatefulWidget {
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  String name = 'Mr.Sandman';
+  String email = 'email@contoh.com';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profile Settings'),
-        backgroundColor: Colors.deepPurple,
+        title: Text('Profil'),
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            SizedBox(height: 20),
-            CircleAvatar(
-              radius: 50,
-              backgroundImage: NetworkImage(profileImageUrl),
-            ),
-            SizedBox(height: 20),
-            Text(
-              userName,
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.deepPurple,
+            GestureDetector(
+              onTap: () {
+              },
+              child: CircleAvatar(
+                radius: 80,
+                backgroundImage: NetworkImage('https://contoh.com/foto.jpg'),
               ),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  name,
+                  style: TextStyle(fontSize: 24),
+                ),
+                IconButton(
+                  icon: Icon(Icons.edit),
+                  onPressed: () {
+                  },
+                ),
+              ],
+            ),
             Text(
-              userEmail,
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.grey[600],
-              ),
+              email,
+              style: TextStyle(fontSize: 20),
             ),
             SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {},
-              child: Text('Change Password'),
-              style: ElevatedButton.styleFrom(
-                primary: Colors.deepPurple,
-              ),
+              onPressed: () {
+              },
+              child: Text('Ganti Password'),
             ),
           ],
         ),
