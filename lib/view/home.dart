@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'presensi.dart';
-import 'profile.dart';
+import 'package:project_p3l_mobile/data/User.dart';
+import 'package:project_p3l_mobile/view/presensi.dart';
+import 'package:project_p3l_mobile/view/profile.dart';
 
-void main() {
-  runApp(const MaterialApp(
-    title: 'Presensi',
-    home: MyApp()));
+class HomeView extends StatefulWidget {
+  final User loggedIn;
+  const HomeView({super.key, required this.loggedIn});
+
+  @override
+  State<HomeView> createState() => _HomeViewState();
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
+class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -19,12 +20,12 @@ class MyApp extends StatelessWidget {
           title: const Text('Home Screen'),
           backgroundColor: Colors.deepPurple,
         ),
-        body: SingleChildScrollView( 
-          child: Column( 
+        body: SingleChildScrollView(
+          child: Column(
             children: [
               Center(
                 child: GridView.count(
-                  shrinkWrap: true, 
+                  shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
                   crossAxisCount: 3,
                   mainAxisSpacing: 10,
@@ -37,11 +38,13 @@ class MyApp extends StatelessWidget {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => const PresensiPage()),
+                            MaterialPageRoute(
+                                builder: (context) => const PresensiPage()),
                           );
                         },
                         child: const Center(
-                          child: Icon(Icons.fingerprint, size: 70, color: Colors.white),
+                          child: Icon(Icons.fingerprint,
+                              size: 70, color: Colors.white),
                         ),
                       ),
                     ),
@@ -50,7 +53,8 @@ class MyApp extends StatelessWidget {
                       child: InkWell(
                         onTap: () {},
                         child: const Center(
-                          child: Icon(Icons.mail, size: 70, color: Colors.white),
+                          child:
+                              Icon(Icons.mail, size: 70, color: Colors.white),
                         ),
                       ),
                     ),
@@ -59,7 +63,8 @@ class MyApp extends StatelessWidget {
                       child: InkWell(
                         onTap: () {},
                         child: const Center(
-                          child: Icon(Icons.phone, size: 70, color: Colors.white),
+                          child:
+                              Icon(Icons.phone, size: 70, color: Colors.white),
                         ),
                       ),
                     ),
@@ -68,7 +73,8 @@ class MyApp extends StatelessWidget {
                       child: InkWell(
                         onTap: () {},
                         child: const Center(
-                          child: Icon(Icons.logout, size: 70, color: Colors.white),
+                          child:
+                              Icon(Icons.logout, size: 70, color: Colors.white),
                         ),
                       ),
                     ),
@@ -77,22 +83,27 @@ class MyApp extends StatelessWidget {
                       child: InkWell(
                         onTap: () {},
                         child: const Center(
-                          child: Icon(Icons.book, size: 70, color: Colors.white),
+                          child:
+                              Icon(Icons.book, size: 70, color: Colors.white),
                         ),
                       ),
                     ),
                   ],
                 ),
               ),
-              Image.network('https://via.placeholder.com/400x200', width: double.infinity),
+              Image.network('https://via.placeholder.com/400x200',
+                  width: double.infinity),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text('Delicious pasta with a rich tomato sauce, garnished with fresh basil.'),
+                child: Text(
+                    'Delicious pasta with a rich tomato sauce, garnished with fresh basil.'),
               ),
-              Image.network('https://via.placeholder.com/400x200', width: double.infinity),
+              Image.network('https://via.placeholder.com/400x200',
+                  width: double.infinity),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text('A classic cheeseburger with lettuce, tomato, and a side of fries.'),
+                child: Text(
+                    'A classic cheeseburger with lettuce, tomato, and a side of fries.'),
               ),
             ],
           ),
@@ -112,7 +123,7 @@ class MyApp extends StatelessWidget {
               label: 'Profile',
             ),
           ],
-          currentIndex: 1, 
+          currentIndex: 1,
           selectedItemColor: Colors.deepPurple,
           onTap: (index) {
             if (index == 2) {

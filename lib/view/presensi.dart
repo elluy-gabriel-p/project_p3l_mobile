@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'main.dart';
+import '../main.dart';
 
 class PresensiPage extends StatefulWidget {
   const PresensiPage({Key? key}) : super(key: key);
