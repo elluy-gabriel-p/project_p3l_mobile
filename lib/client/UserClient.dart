@@ -5,7 +5,7 @@ import 'package:http/http.dart';
 
 class userClient {
   static final String url = '10.0.2.2:8000';
-  static final String endpoint = '/api/User';
+  static final String endpoint = '/api/user';
   //janlup ganti ini kalo perlu ganti
 
   static Future<List<User>> fetchAll() async {
@@ -65,7 +65,6 @@ class userClient {
           body: jsonEncode({"username": username, "password": password}));
       if (response.statusCode != 200) throw Exception(response.reasonPhrase);
       return User.fromJson(json.decode(response.body)['data']);
-      
     } catch (e) {
       return Future.error(e.toString());
     }

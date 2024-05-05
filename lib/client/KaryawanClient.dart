@@ -5,7 +5,7 @@ import 'package:http/http.dart';
 
 class karyawanClient {
   static final String url = '10.0.2.2:8000';
-  static final String endpoint = '/api/Karyawan';
+  static final String endpoint = '/api/karyawan';
   //janlup ganti ini kalo perlu ganti
 
   static Future<List<Karyawan>> fetchAll() async {
@@ -58,13 +58,19 @@ class karyawanClient {
     }
   }
 
-  static Future<Karyawan> Login(String username, String password) async {
+  static Future<Karyawan> login(String email, String password) async {
     try {
-      var response = await post(Uri.http(url, "/api/login"),
-          headers: {"Content-Type": "application/json"},
-          body: jsonEncode({"username": username, "password": password}));
+      var response = await post(Uri.http(url, '$endpoint/loginAdmin'),
+          body: {'email': email, 'password': password});
       if (response.statusCode != 200) throw Exception(response.reasonPhrase);
-      return Karyawan.fromJson(json.decode(response.body)['data']);
+      var karyawan = Karyawan.fromJson(json.decode(response.body)['data']);
+      if (karyawan.jabatan == 'admin' ||
+          karyawan.role == 'mo' ||
+          karyawan.role == 'owner') {
+        return karyawan;
+      } else {
+        throw Exception('Anda tidak memiliki akses');
+      }
     } catch (e) {
       return Future.error(e.toString());
     }
