@@ -58,19 +58,13 @@ class karyawanClient {
     }
   }
 
-  static Future<Karyawan> Login(String email, String password) async {
+  static Future<Karyawan> Login(String username, String password) async {
     try {
-      var response = await post(Uri.http(url, '$endpoint/loginAdmin'),
-          body: {'email': email, 'password': password});
+      var response = await post(Uri.http(url, "/api/loginAdmin"),
+          headers: {"Content-Type": "application/json"},
+          body: jsonEncode({"username": username, "password": password}));
       if (response.statusCode != 200) throw Exception(response.reasonPhrase);
-      var karyawan = Karyawan.fromJson(json.decode(response.body)['data']);
-      if (karyawan.jabatan == 'admin' ||
-          karyawan.jabatan == 'mo' ||
-          karyawan.jabatan == 'owner') {
-        return karyawan;
-      } else {
-        throw Exception('Anda tidak memiliki akses');
-      }
+      return Karyawan.fromJson(json.decode(response.body)['data']);
     } catch (e) {
       return Future.error(e.toString());
     }
@@ -95,7 +89,7 @@ class karyawanClient {
     String uri = '127.0.0.1:8000';
 
     try {
-      var apiResult = await post(Uri.http(uri, "/api/login"),
+      var apiResult = await post(Uri.http(uri, "/api/loginAdmin"),
           body: jsonEncode({"username": username, "password": password}));
       if (apiResult.statusCode == 200) {
         final result = LoginModel.fromRawJson(apiResult.body);

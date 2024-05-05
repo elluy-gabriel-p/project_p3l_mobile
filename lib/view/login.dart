@@ -3,7 +3,9 @@ import 'package:project_p3l_mobile/client/KaryawanClient.dart';
 import 'package:project_p3l_mobile/client/UserClient.dart';
 import 'package:project_p3l_mobile/data/Karyawan.dart';
 import 'package:project_p3l_mobile/data/User.dart';
-import 'package:project_p3l_mobile/view/dashboard.dart';
+import 'package:project_p3l_mobile/view/dashboardAdmin.dart';
+import 'package:project_p3l_mobile/view/dashboardMO.dart';
+import 'package:project_p3l_mobile/view/dashboardOwner.dart';
 import 'package:project_p3l_mobile/view/home.dart';
 import 'package:project_p3l_mobile/component/form_component.dart';
 import 'package:provider/provider.dart';
@@ -81,7 +83,7 @@ class _LoginViewState extends State<LoginView> {
                   // Logo
                   CircleAvatar(
                     radius: 60,
-                    // backgroundImage: AssetImage('image/globalHotelLogo.png'),
+                    backgroundImage: AssetImage('assets/images/logoP3L.png'),
                   ),
 
                   SizedBox(height: 20),
@@ -156,28 +158,47 @@ class _LoginViewState extends State<LoginView> {
                         ElevatedButton(
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
-                              User? loggedIn = await login();
-                              if (loggedIn != null) {
+                              User? loggedInUser = await login();
+                              if (loggedInUser != null) {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            HomeView(loggedIn: loggedIn)));
-                              } else {
-                                Karyawan? loggedInAdmin = await loginAdmin();
-                                if (loggedInAdmin != null) {
-                                  // ignore: use_build_context_synchronously
+                                            HomeView(loggedIn: loggedInUser)));
+                              }
+
+                              Karyawan? loggedIn = await loginAdmin();
+                              if (loggedIn != null) {
+                                // ignore: use_build_context_synchronously
+                                if (loggedIn.jabatan == 'admin') {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => DashboardView(
-                                              loggedInAdmin: loggedInAdmin)));
+                                          builder: (context) =>
+                                              DashboardAdminView(
+                                                  loggedInAdmin: loggedIn)));
+                                } else if (loggedIn.jabatan == 'mo') {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => DashboardMOView(
+                                              loggedInMO: loggedIn)));
+                                } else if (loggedIn.jabatan == 'owner') {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              DashboardOwnerView(
+                                                  loggedInOwner: loggedIn)));
                                 } else {
                                   showSnackbar(
                                       context,
-                                      "Username atau Password Salah",
+                                      "Anda bukan Admin, MO, atau Owner",
                                       Colors.red);
                                 }
+                              } else {
+                                showSnackbar(context,
+                                    "Username atau Password Salah", Colors.red);
                               }
                             }
                           },
