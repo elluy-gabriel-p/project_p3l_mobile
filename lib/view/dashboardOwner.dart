@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_p3l_mobile/data/Karyawan.dart';
+import 'package:project_p3l_mobile/view/login.dart';
 
 class DashboardOwnerView extends StatefulWidget {
   final Karyawan loggedInOwner;
@@ -14,7 +15,7 @@ class _DashboardOwnerViewState extends State<DashboardOwnerView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Dashboard Admin'),
+        title: Text('Dashboard Owner'),
       ),
       drawer: Drawer(
         child: ListView(
@@ -43,11 +44,21 @@ class _DashboardOwnerViewState extends State<DashboardOwnerView> {
               },
             ),
 
-            ListTile(
-              title: Text('Data Presensi'),
-              onTap: () {
-                // Handle menu 4 tap
-              },
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 25),
+              child: ElevatedButton(
+                onPressed: () {
+                  // Handle logout tap
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginView()),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.red, // Set button color to red
+                ),
+                child: Text('Logout'),
+              ),
             ),
             // Add more menu items as needed
           ],

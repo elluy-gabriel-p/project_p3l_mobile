@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:project_p3l_mobile/data/Karyawan.dart';
+import 'package:project_p3l_mobile/view/login.dart';
 
 class DashboardAdminView extends StatefulWidget {
   final Karyawan loggedInAdmin;
-  const DashboardAdminView({super.key, required this.loggedInAdmin});
+  const DashboardAdminView({Key? key, required this.loggedInAdmin})
+      : super(key: key);
 
   @override
   State<DashboardAdminView> createState() => _DashboardAdminViewState();
@@ -35,7 +37,22 @@ class _DashboardAdminViewState extends State<DashboardAdminView> {
                 // Handle menu 2 tap
               },
             ),
-            // Add more menu items as needed
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 25),
+              child: ElevatedButton(
+                onPressed: () {
+                  // Handle logout tap
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginView()),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.red, // Set button color to red
+                ),
+                child: Text('Logout'),
+              ),
+            ),
           ],
         ),
       ),

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:project_p3l_mobile/data/User.dart';
+import 'package:project_p3l_mobile/view/login.dart';
 import 'package:project_p3l_mobile/view/presensi.dart';
 import 'package:project_p3l_mobile/view/profile.dart';
 
 class HomeView extends StatefulWidget {
-  final User loggedIn;
-  const HomeView({super.key, required this.loggedIn});
+  const HomeView({Key? key}) : super(key: key);
 
   @override
   State<HomeView> createState() => _HomeViewState();
@@ -49,7 +49,7 @@ class _HomeViewState extends State<HomeView> {
                       ),
                     ),
                     Card(
-                      color: Colors.green,
+                      color: Colors.cyan,
                       child: InkWell(
                         onTap: () {},
                         child: const Center(
@@ -69,12 +69,19 @@ class _HomeViewState extends State<HomeView> {
                       ),
                     ),
                     Card(
-                      color: Colors.red,
+                      color: Colors.green,
                       child: InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          // Handle logout tap
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LoginView()),
+                          );
+                        },
                         child: const Center(
                           child:
-                              Icon(Icons.logout, size: 70, color: Colors.white),
+                              Icon(Icons.login, size: 70, color: Colors.white),
                         ),
                       ),
                     ),
@@ -85,6 +92,23 @@ class _HomeViewState extends State<HomeView> {
                         child: const Center(
                           child:
                               Icon(Icons.book, size: 70, color: Colors.white),
+                        ),
+                      ),
+                    ),
+                    Card(
+                      color: Colors.red,
+                      child: InkWell(
+                        onTap: () {
+                          // Handle logout tap
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LoginView()),
+                          );
+                        },
+                        child: const Center(
+                          child:
+                              Icon(Icons.logout, size: 70, color: Colors.white),
                         ),
                       ),
                     ),

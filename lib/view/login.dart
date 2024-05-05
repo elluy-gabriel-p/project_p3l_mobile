@@ -163,8 +163,7 @@ class _LoginViewState extends State<LoginView> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            HomeView(loggedIn: loggedInUser)));
+                                        builder: (context) => HomeView()));
                               }
 
                               Karyawan? loggedIn = await loginAdmin();

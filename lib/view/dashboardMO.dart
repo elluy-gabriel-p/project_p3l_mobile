@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_p3l_mobile/data/Karyawan.dart';
+import 'package:project_p3l_mobile/view/login.dart';
 
 class DashboardMOView extends StatefulWidget {
   final Karyawan loggedInMO;
@@ -14,7 +15,7 @@ class _DashboardMOViewState extends State<DashboardMOView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Dashboard Admin'),
+        title: Text('Dashboard MO'),
       ),
       drawer: Drawer(
         child: ListView(
@@ -34,6 +35,22 @@ class _DashboardMOViewState extends State<DashboardMOView> {
               onTap: () {
                 // Handle menu 2 tap
               },
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 25),
+              child: ElevatedButton(
+                onPressed: () {
+                  // Handle logout tap
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginView()),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.red, // Set button color to red
+                ),
+                child: Text('Logout'),
+              ),
             ),
             // Add more menu items as needed
           ],
