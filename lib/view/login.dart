@@ -18,7 +18,7 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
   final _formKey = GlobalKey<FormState>();
-  TextEditingController nama_karyawanController = TextEditingController();
+  TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool _isSecurePassword = true;
 
@@ -38,7 +38,7 @@ class _LoginViewState extends State<LoginView> {
     Future<User?> login() async {
       try {
         User loggedIn = await userClient.Login(
-            nama_karyawanController.text, passwordController.text);
+            usernameController.text, passwordController.text);
         // final Uint8List imageBytes =
         //     loggedIn.profilePicture!.buffer.asUint8List();
         // final Uint8List compressedImage = await compressImage(imageBytes);
@@ -53,7 +53,7 @@ class _LoginViewState extends State<LoginView> {
     Future<Karyawan?> loginAdmin() async {
       try {
         Karyawan loggedInAdmin = await karyawanClient.Login(
-            nama_karyawanController.text, passwordController.text);
+            usernameController.text, passwordController.text);
         // final Uint8List imageBytes =
         //     loggedIn.profilePicture!.buffer.asUint8List();
         // final Uint8List compressedImage = await compressImage(imageBytes);
@@ -105,7 +105,7 @@ class _LoginViewState extends State<LoginView> {
                       children: [
                         // Username Text Field
                         TextFormField(
-                          controller: nama_karyawanController,
+                          controller: usernameController,
                           decoration: InputDecoration(
                             labelText: "Username",
                             prefixIcon: Icon(Icons.person),
@@ -156,27 +156,29 @@ class _LoginViewState extends State<LoginView> {
                         ElevatedButton(
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
-                              // User? loggedIn = await login();
-                              // if (loggedIn != null) {
-                              //   Navigator.push(
-                              //       context,
-                              //       MaterialPageRoute(
-                              //           builder: (context) =>
-                              //               HomeView(loggedIn: loggedIn)));
-                              // } else {
-                              Karyawan? loggedInAdmin = await loginAdmin();
-                              if (loggedInAdmin != null) {
-                                // ignore: use_build_context_synchronously
+                              User? loggedIn = await login();
+                              if (loggedIn != null) {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => DashboardView(
-                                            loggedInAdmin: loggedInAdmin)));
+                                        builder: (context) =>
+                                            HomeView(loggedIn: loggedIn)));
                               } else {
-                                showSnackbar(context,
-                                    "Username atau Password Salah", Colors.red);
+                                Karyawan? loggedInAdmin = await loginAdmin();
+                                if (loggedInAdmin != null) {
+                                  // ignore: use_build_context_synchronously
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => DashboardView(
+                                              loggedInAdmin: loggedInAdmin)));
+                                } else {
+                                  showSnackbar(
+                                      context,
+                                      "Username atau Password Salah",
+                                      Colors.red);
+                                }
                               }
-                              // }
                             }
                           },
                           style: ButtonStyle(

@@ -34,7 +34,7 @@ class Karyawan {
   final int? id;
   int? honor_harian, bonus;
 
-  String? nama_karyawan, password;
+  String? nama_karyawan, password, jabatan;
   // Uint8List? profilePicture;
 
   Karyawan(
@@ -42,7 +42,8 @@ class Karyawan {
       this.nama_karyawan,
       this.honor_harian,
       this.password,
-      this.bonus});
+      this.bonus,
+      this.jabatan});
   // this.profilePicture});
 
   factory Karyawan.fromRawJson(String str) =>
@@ -52,7 +53,8 @@ class Karyawan {
       nama_karyawan: json["nama_karyawan"],
       honor_harian: json["honor_harian"],
       password: json["password"],
-      bonus: json["bonus"]);
+      bonus: json["bonus"],
+      jabatan: json["jabatan"]);
   // profilePicture: base64Decode(json["profilePicture"]));
 
   String toRawJson() => json.encode(toJson());
@@ -62,6 +64,7 @@ class Karyawan {
         "honor_harian": honor_harian,
         "password": password,
         "bonus": bonus,
+        "jabatan": jabatan,
         // "profilePicture":
         //     base64EncodeWithPadding(profilePicture ?? Uint8List(0)),
       };

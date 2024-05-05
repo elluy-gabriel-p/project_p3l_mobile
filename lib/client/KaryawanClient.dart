@@ -58,15 +58,15 @@ class karyawanClient {
     }
   }
 
-  static Future<Karyawan> login(String email, String password) async {
+  static Future<Karyawan> Login(String email, String password) async {
     try {
       var response = await post(Uri.http(url, '$endpoint/loginAdmin'),
           body: {'email': email, 'password': password});
       if (response.statusCode != 200) throw Exception(response.reasonPhrase);
       var karyawan = Karyawan.fromJson(json.decode(response.body)['data']);
       if (karyawan.jabatan == 'admin' ||
-          karyawan.role == 'mo' ||
-          karyawan.role == 'owner') {
+          karyawan.jabatan == 'mo' ||
+          karyawan.jabatan == 'owner') {
         return karyawan;
       } else {
         throw Exception('Anda tidak memiliki akses');
