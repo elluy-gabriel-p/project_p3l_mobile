@@ -190,6 +190,22 @@ class _LoginViewState extends State<LoginView> {
                             style: TextStyle(color: Colors.white),
                           ),
                         ),
+
+                        SizedBox(height: 20),
+
+                        // Forgot Password Button
+                        TextButton(
+                          onPressed: () {
+                            // Implement forgot password functionality
+                          },
+                          child: Text(
+                            "Forgot Password?",
+                            style: TextStyle(
+                              color: Colors.blue,
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
