@@ -3,6 +3,7 @@ import 'package:project_p3l_mobile/data/User.dart';
 import 'package:project_p3l_mobile/view/login.dart';
 import 'package:project_p3l_mobile/view/presensi.dart';
 import 'package:project_p3l_mobile/view/profile.dart';
+import 'package:project_p3l_mobile/view/produk.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -135,8 +136,8 @@ class _HomeViewState extends State<HomeView> {
         bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              label: 'Settings',
+              icon: Icon(Icons.breakfast_dining_rounded),
+              label: 'Produk',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
@@ -148,12 +149,17 @@ class _HomeViewState extends State<HomeView> {
             ),
           ],
           currentIndex: 1,
-          selectedItemColor: Colors.deepPurple,
           onTap: (index) {
             if (index == 2) {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => ProfilePage()),
+              );
+            } else if (index == 0) {
+              // Handle logout tap
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProdukPage()),
               );
             }
           },

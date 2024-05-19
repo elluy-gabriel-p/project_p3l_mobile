@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'view/presensi.dart';
-import 'view/profile.dart';
 import 'view/home.dart';
-import 'view/login.dart';
 
 void main() {
   //aplikasi dibungkus ProviderScope agar bisa mengunakan riverpod
