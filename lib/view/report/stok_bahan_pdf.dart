@@ -61,7 +61,12 @@ Future<void> createPdf(BuildContext context) async {
             headerStyle: pw.TextStyle(fontWeight: pw.FontWeight.bold),
             headers: ['Nama Bahan', 'Satuan', 'Stok'],
             data: data
-                .map((item) => [item['name'], item['unit'], item['stock']])
+                .map((item) => [
+                      item['name'],
+                      item['unit'],
+                      NumberFormat.decimalPatternDigits(locale: 'id_ID')
+                          .format(item['stock']),
+                    ])
                 .toList(),
             border: pw.TableBorder.all(),
             cellAlignment: pw.Alignment.center,
