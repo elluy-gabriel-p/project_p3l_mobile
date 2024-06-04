@@ -4,6 +4,7 @@ import 'package:project_p3l_mobile/view/login.dart';
 
 class DashboardAdminView extends StatefulWidget {
   final Karyawan loggedInAdmin;
+
   const DashboardAdminView({Key? key, required this.loggedInAdmin})
       : super(key: key);
 
@@ -22,26 +23,29 @@ class _DashboardAdminViewState extends State<DashboardAdminView> {
         child: ListView(
           children: [
             UserAccountsDrawerHeader(
-              accountName: Text(widget.loggedInAdmin.nama_karyawan!),
-              accountEmail: Text(widget.loggedInAdmin.jabatan!),
+              accountName:
+                  Text(widget.loggedInAdmin.nama_karyawan ?? 'No Name'),
+              accountEmail: Text(widget.loggedInAdmin.jabatan ?? 'No Position'),
             ),
             ListTile(
               title: Text('Data Produk'),
               onTap: () {
-                // Handle menu 1 tap
+                // Handle Data Produk tap
+                // Navigator.push(context, MaterialPageRoute(builder: (context) => DataProdukView()));
               },
             ),
             ListTile(
               title: Text('Data Hampers'),
               onTap: () {
-                // Handle menu 2 tap
+                // Handle Data Hampers tap
+                // Navigator.push(context, MaterialPageRoute(builder: (context) => DataHampersView()));
               },
             ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 25),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
               child: ElevatedButton(
                 onPressed: () {
-                  // Handle logout tap
+                  // Handle logout
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(builder: (context) => LoginView()),

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:project_p3l_mobile/data/Karyawan.dart';
 import 'package:project_p3l_mobile/view/login.dart';
+import 'package:project_p3l_mobile/view/report/stok_bahan_pdf.dart';
 
 class DashboardMOView extends StatefulWidget {
   final Karyawan loggedInMO;
+
   const DashboardMOView({super.key, required this.loggedInMO});
 
   @override
@@ -21,26 +23,39 @@ class _DashboardMOViewState extends State<DashboardMOView> {
         child: ListView(
           children: [
             UserAccountsDrawerHeader(
-              accountName: Text(widget.loggedInMO.nama_karyawan!),
-              accountEmail: Text(widget.loggedInMO.jabatan!),
+              accountName: Text(widget.loggedInMO.nama_karyawan ?? 'No Name'),
+              accountEmail: Text(widget.loggedInMO.jabatan ?? 'No Position'),
+              currentAccountPicture: CircleAvatar(
+                child: Icon(Icons.person),
+              ),
             ),
             ListTile(
               title: Text('Data Presensi'),
               onTap: () {
-                // Handle menu 1 tap
+                // Handle Data Presensi tap
+                // Navigator.push(context, MaterialPageRoute(builder: (context) => DataPresensiView()));
               },
             ),
             ListTile(
               title: Text('Data Jabatan'),
               onTap: () {
-                // Handle menu 2 tap
+                // Handle Data Jabatan tap
+                // Navigator.push(context, MaterialPageRoute(builder: (context) => DataJabatanView()));
               },
             ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 25),
+            ListTile(
+              title: Text('Laporan Stok Bahan Baku'),
+              onTap: () {
+                // Handle Laporan Stok Bahan Baku tap
+                createPdf(
+                    context); // Call the createPdf function from stok_bahan_pdf.dart
+              },
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
               child: ElevatedButton(
                 onPressed: () {
-                  // Handle logout tap
+                  // Handle logout
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(builder: (context) => LoginView()),
@@ -56,7 +71,12 @@ class _DashboardMOViewState extends State<DashboardMOView> {
           ],
         ),
       ),
-      body: const Placeholder(),
+      body: const Center(
+        child: Text(
+          'Welcome to the MO Dashboard',
+          style: TextStyle(fontSize: 20),
+        ),
+      ),
     );
   }
 }
